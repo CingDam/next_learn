@@ -1,0 +1,5 @@
+사이트의 정보 와 기본적인 틀을 만드는 공간
+react를 배웠으면 layout은 body안에 layout이라는 컴포넌트로 우리가 만들었던 라우터 아래의 page.jsx(tsx)를 찾아가
+그것을 컴포넌트 시키는 것임
+layout은 합연산임
+root의 레이아웃 아래에 라우팅된 곳에 layout.jsx(tsx)가 있으면 root layout(부모)아래에 layout컴포넌트를 넣는 것임(자식)
