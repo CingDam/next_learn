@@ -1,20 +1,14 @@
 import React, { Suspense } from "react";
 import { API_URL } from "../../../(home)/page";
-import MovieInfo from "../../../../component/movie-videos";
+import MovieInfo, { getMovie } from "../../../../component/movie-info";
 import MovieVideo from "../../../../component/movie-videos";
 
-async function getMovie(id){
-    console.log(`Fetching movies: ${Date.now()}`)
-    await new Promise((resolve) => setTimeout(resolve,5000))
-    const response = await fetch(`${API_URL}/${id}`);
-    return response.json();
-}
-
-async function getVideos(id) {
-    console.log(`Fetching videos: ${Date.now()}`)
-    await new Promise((resolve) => setTimeout(resolve,5000))
-    const response = await fetch(`${API_URL}/${id}/videos`);
-    return response.json();
+export async function generateMetadata({params}) {
+    const {id} = await params
+    const movie = await getMovie(id);
+    return {
+        title : movie.title,
+    }
 }
 
 export default async function MovieDetail({params}){
@@ -35,13 +29,11 @@ export default async function MovieDetail({params}){
             각 컴포넌트한테 api를 요청하는 방법 => 이 방법은 병렬요청보다 더욱더 유연적임
             fallback속성을 사용하면 백엔드 서버에서 데이터를 불러오는 동안 보여줄 ui를 사용하면 됨 
          */}
-         <h1>Movie Info</h1>
         <Suspense fallback={<h1>Lodaing movie info</h1>}>
             <MovieInfo id={id}/>
         </Suspense>
         </div>
        <div>
-       <h1>Movie Videos</h1>
         <Suspense fallback={<h1>Lodaing movie videos</h1>}>
             <MovieVideo id={id}/>
         </Suspense>
