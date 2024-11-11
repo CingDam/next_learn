@@ -14,7 +14,8 @@ export default function Movie({title, id, poster_path}){
     return (
         <div className={styles.movie}>
                 <img src={poster_path} alt={title} onClick={imageClick}/>
-                <Link href={`/movies/${id}`}>{title}</Link>
+                {/* prfetch를 추가하면 배포 할 때 fetch를 자동을 실행 */}
+                <Link prefetch href={`/movies/${id}`}>{title}</Link>
         </div>
     )
 }
